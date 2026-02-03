@@ -11,28 +11,25 @@
 # Use iteration (e.g., loops like for or while).
 # Take different paths based on parameter values.
 
-jokes = ["robbers", "tanks", "pencils"] # we create a list at the start to store joke topics
+jokes = [("robbers", "Calder", "Calder police - I've been robbed!"), 
+          ("tanks", "Tank ", "You are welcome! "), 
+          ("pencils", "Broken pencil ", "Nevermind, it's pointless! ")] # we create a list of tuples to store joke topics with their prompts and punchlines
 
 def tell_joke(answer):
     print("Knock Knock") #we moved the common "Knock Knock" line outside the selection structure to avoid repetition
-    if answer == jokes[0]: #we use the list to access joke topics instead of typing them out multiple times, and since theres only 3 options, this is more efficient
-        input("Calder") 
-        print("Calder police - I've been robbed!") #we removed unnecessary input prompts that did not contribute to the joke  
-    elif answer == jokes[1]:
-        input("Tank ")
-        print("You are welcome! ") #we removed unnecessary input prompts that did not contribute to the joke 
-    elif answer == jokes[2]:
-        input("Broken pencil ")
-        print("Nevermind, it's pointless! ") #we removed unnecessary input prompts that did not contribute to the joke 
-    else:
-        print("Sorry, I don't have a joke for that topic.")  #we added an else statement to handle unexpected inputs and simplify the code structure
+    for topic, prompt, punchline in jokes: #we use a for loop to iterate through the jokes list and find a match
+        if answer == topic: #we check if the answer matches the joke topic
+            input(prompt)
+            print(punchline)
+            return
+    print("Sorry, I don't have a joke for that topic.") #we added this outside the loop to handle unexpected inputs
 
 joke = input("Do you want to hear a joke? Yes or No ") 
 while joke in ["Yes", "yes"]: # we use a list to check for multiple acceptable inputs for yes
     print("Great, Do you want to hear a joke about robbers, tanks, or pencils?")
     answer = input()
     tell_joke(answer)
-    joke = input("Do you want to hear another joke or are you finished? ")
+    joke = input("Do you want to hear another joke or are you finished? Yes or Finished ")
 
 print("Okay, see you!")
 rate = int(input("Please rate our game 1-10! ")) #instead of asking for rating only if finished, we ask it always after exiting the joke loop
